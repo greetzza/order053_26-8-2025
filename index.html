@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="icon" href="gambar/logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="gambar/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Gold with picture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Front of the Card -->
+    <div class="card-container" id="cardFront">
+        <div class="card-front">
+            <div class="gold-border"></div>
+            <div class="gold-flakes" id="goldFlakes"></div>
+            <h1 class="title">Special Greetings</h1>
+            <p class="subtitle">For</p>
+            <p class="subtitle">Shasa</p>
+            <button class="open-btn" id="openBtn">OPEN CARD</button>
+        </div>
+    </div>
+
+    <!-- Inside of the Card -->
+    <div class="card-inside" id="cardInside">
+        <button class="close-btn" id="closeBtn"><i class="fas fa-times"></i></button>
+        <div class="message-container">
+            <h2 class="message-title">Dear, Shasa</h2>
+            <p class="message" style="animation-delay: 0.2s">Selamat ya Shabrina Ali, S.E atas keberhasilanmu menyelesaikan sidang! melewati Prof Prof itu. gw ngerti banget perjuangan lu selama ini begadang, lelah, bahkan rasa ingin menyerah yang sering datang, tapi lu mampu bertahan sampai di titik ini. gw benar-benar bangga sama lu.</p>
+            <p class="message" style="animation-delay: 0.4s">Semoga sidang yang sudah lu lalui menjadi langkah awal menuju masa depan yang penuh dengan keberhasilan. Semoga setiap ilmu yang lu peroleh bisa bermanfaat, tidak hanya untuk diri lu sendiri, tetapi juga untuk banyak orang di sekitar lu . </p>
+            <p class="message" style="animation-delay: 0.6s">gw berdoa semoga semua jalan lu setelah ini dilapangkan, rezeki selalu diberkahi, dan semua impian yang lu simpan dalam hati satu per satu dapat terwujud dengan indah.
+Semoga Allah selalu melindungi setiap langkah lu, memberikan kekuatan di saat sulit, menenangkan hati lu di saat ragu, serta mengangkat derajat lu dengan ilmu yang telah lu perjuangkan. Tapii Ingett yaa cantik ini bukan akhir dari perjalanan, melainkan awal dari babak baru dalam hidup lu. Teruslah berusaha, jangan pernah lelah bermimpi, dan jangan ragu untuk melangkah lebih jauh lagi.
+Sekali lagi, selamat ya Cantikk! </p>
+            <p class="message" style="animation-delay: 0.8s">Aku percaya kamu akan menjadi pribadi yang lebih hebat dan sukses di masa depan. Doa terbaikku untuk kamu 🫶🏼</p>
+            <p class="signature">With all my heart,<br>Zaky</p>
+            <div class="gallery-container">
+                <div class="masonry-gallery">
+                    <div class="masonry-item">
+                        <img src="gambar/foto(1).jpeg" alt="Art 1">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="gambar/foto(2).jpeg" alt="Art 2">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="gambar/foto(9).jpeg" alt="Art 3">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="gambar/foto(4).jpeg" alt="Art 4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="gambar/aom.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const cardFront = document.getElementById('cardFront');
+            const cardInside = document.getElementById('cardInside');
+            const openBtn = document.getElementById('openBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const musicControl = document.getElementById('musicControl');
+            const bgMusic = document.getElementById('bgMusic');
+            const goldFlakes = document.getElementById('goldFlakes');
+            
+            // Create gold flakes
+            function createFlakes() {
+                const flakeCount = 30;
+                for (let i = 0; i < flakeCount; i++) {
+                    const flake = document.createElement('div');
+                    flake.classList.add('flake');
+                    
+                    // Random properties
+                    const size = Math.random() * 5 + 2;
+                    const posX = Math.random() * 100;
+                    const delay = Math.random() * 5;
+                    const duration = Math.random() * 10 + 10;
+                    
+                    flake.style.width = `${size}px`;
+                    flake.style.height = `${size}px`;
+                    flake.style.left = `${posX}%`;
+                    flake.style.animationDelay = `${delay}s`;
+                    flake.style.animationDuration = `${duration}s`;
+                    
+                    goldFlakes.appendChild(flake);
+                }
+            }
+            
+            // Open card
+            openBtn.addEventListener('click', function() {
+                cardFront.style.opacity = '0';
+                cardFront.style.pointerEvents = 'none';
+                
+                setTimeout(() => {
+                    cardInside.style.display = 'flex';
+                    setTimeout(() => {
+                        cardInside.style.opacity = '1';
+                    }, 10);
+                }, 500);
+                
+                // Play music
+                bgMusic.volume = 0.3;
+                bgMusic.play();
+            });
+            
+            // Close card
+            closeBtn.addEventListener('click', function() {
+                cardInside.style.opacity = '0';
+                
+                setTimeout(() => {
+                    cardInside.style.display = 'none';
+                    cardFront.style.opacity = '1';
+                    cardFront.style.pointerEvents = 'auto';
+                }, 500);
+            });
+            
+            // Music control
+            let isMusicPlaying = false;
+            musicControl.addEventListener('click', function() {
+                if (isMusicPlaying) {
+                    bgMusic.pause();
+                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
+                } else {
+                    bgMusic.play();
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+                isMusicPlaying = !isMusicPlaying;
+            });
+            
+            // Initialize
+            createFlakes();
+        });
+    </script>
+</body>
+</html>
